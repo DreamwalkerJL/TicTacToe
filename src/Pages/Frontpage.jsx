@@ -5,7 +5,7 @@ export default function Frontpage() {
   const navigate = useNavigate();
   return (
     <div>
-      <Link to="/playai">
+      <Link to="/play2">
         <button>Play vs AI</button>
       </Link>
     </div>

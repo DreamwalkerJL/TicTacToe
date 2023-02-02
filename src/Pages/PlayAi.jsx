@@ -18,37 +18,55 @@ export default function PlayAi() {
     setField(fieldArray());
   }
 
-  // function toggleFieldPlayer() {
-  //   setField(prevField => prevField.map(field => {
-  //     return {...field, isFilled: 2}
-  //   }))
-  // }
   const [checked, setChecked] = useState(0);
   function isChecked() {
+    if (checked > 2 && checked < 20000) {
+      setChecked(1);
+    }
     if (
-      (g1AnyOpen.length === 1 && g1WinMove.length === 2) ||
-      (g2AnyOpen.length === 1 && g2WinMove.length === 2) ||
-      (g3AnyOpen.length === 1 && g3WinMove.length === 2) ||
-      (g4AnyOpen.length === 1 && g4WinMove.length === 2) ||
-      (g5AnyOpen.length === 1 && g5WinMove.length === 2) ||
-      (g6AnyOpen.length === 1 && g6WinMove.length === 2) ||
-      (g7AnyOpen.length === 1 && g7WinMove.length === 2) ||
-      (g8AnyOpen.length === 1 && g8WinMove.length === 2)
+      g1Filter.length === 3 ||
+      g2Filter.length === 3 ||
+      g3Filter.length === 3 ||
+      g4Filter.length === 3 ||
+      g5Filter.length === 3 ||
+      g6Filter.length === 3 ||
+      g7Filter.length === 3 ||
+      g8Filter.length === 3
     ) {
-      setChecked((prev) => prev + 100);
-    } else if (
-      (g1AnyOpen.length === 1 && g1Filter.length === 2) ||
-      (g2AnyOpen.length === 1 && g2Filter.length === 2) ||
-      (g3AnyOpen.length === 1 && g3Filter.length === 2) ||
-      (g4AnyOpen.length === 1 && g4Filter.length === 2) ||
-      (g4AnyOpen.length === 1 && g4Filter.length === 2) ||
-      (g5AnyOpen.length === 1 && g5Filter.length === 2) ||
-      (g6AnyOpen.length === 1 && g6Filter.length === 2) ||
-      (g7AnyOpen.length === 1 && g7Filter.length === 2) ||
-      (g8AnyOpen.length === 1 && g8Filter.length === 2)
-    ) {
-      setChecked((prev) => prev + 10);
-    } else if (checked >= 10) {
+      setChecked(10000);
+    } else if (g1AnyOpen.length === 1 && g1WinMove.length === 2)
+      return setChecked((prev) => prev + 100);
+    else if (g2AnyOpen.length === 1 && g2WinMove.length === 2)
+      return setChecked((prev) => prev + 200);
+    else if (g3AnyOpen.length === 1 && g3WinMove.length === 2)
+      return setChecked((prev) => prev + 300);
+    else if (g4AnyOpen.length === 1 && g4WinMove.length === 2)
+      return setChecked((prev) => prev + 400);
+    else if (g5AnyOpen.length === 1 && g5WinMove.length === 2)
+      return setChecked((prev) => prev + 500);
+    else if (g6AnyOpen.length === 1 && g6WinMove.length === 2)
+      return setChecked((prev) => prev + 600);
+    else if (g7AnyOpen.length === 1 && g7WinMove.length === 2)
+      return setChecked((prev) => prev + 700);
+    else if (g8AnyOpen.length === 1 && g8WinMove.length === 2)
+      return setChecked((prev) => prev + 800);
+    else if (g1AnyOpen.length === 1 && g1Filter.length === 2)
+      return setChecked((prev) => prev + 10);
+    else if (g2AnyOpen.length === 1 && g2Filter.length === 2)
+      return setChecked((prev) => prev + 20);
+    else if (g3AnyOpen.length === 1 && g3Filter.length === 2)
+      return setChecked((prev) => prev + 30);
+    else if (g4AnyOpen.length === 1 && g4Filter.length === 2)
+      return setChecked((prev) => prev + 40);
+    else if (g5AnyOpen.length === 1 && g5Filter.length === 2)
+      return setChecked((prev) => prev + 50);
+    else if (g6AnyOpen.length === 1 && g6Filter.length === 2)
+      return setChecked((prev) => prev + 60);
+    else if (g7AnyOpen.length === 1 && g7Filter.length === 2)
+      return setChecked((prev) => prev + 70);
+    else if (g8AnyOpen.length === 1 && g8Filter.length === 2)
+      return setChecked((prev) => prev + 80);
+    else if (checked >= 10) {
       return setChecked(1);
     } else {
       return setChecked((prev) => prev + 1);
@@ -68,14 +86,6 @@ export default function PlayAi() {
       })
     );
   }
-
-  // const per = field.filter((element) => element.isFilled === 1);
-
-  // const g1 = per.filter(
-  //   (element) =>
-  //     element.position === 0 || element.position === 1 || element.position === 2
-  // );
-
   const g1 = [field[0], field[1], field[2]];
   const g1AnyOpen = g1.filter((element) => element.isFilled === null);
   const g1WinMove = g1.filter((element) => element.isFilled === 2);
@@ -120,98 +130,150 @@ export default function PlayAi() {
   console.log(g1WinMove);
   const indexMath = Math.floor(Math.random() * notFilled.length);
 
+  function isAiWinning() {
+    if (
+      g1WinMove.length === 3 ||
+      g2WinMove.length === 3 ||
+      g3WinMove.length === 3 ||
+      g4WinMove.length === 3 ||
+      g5WinMove.length === 3 ||
+      g6WinMove.length === 3 ||
+      g7WinMove.length === 3 ||
+      g8WinMove.length === 3
+    ) {
+      setChecked(20000);
+    }
+  }
+
+  const [aiMoves, setAiMoves] = useState(0);
+
   function aiMove() {
-    console.log(checked)
+    console.log(checked);
+    setAiMoves((prev) => prev + 1);
+
     // AI Winning Move
-    if (playerMoves >= 1 && checked >= 100) {
+    if (playerMoves >= 1 && checked >= 100 && checked < 900) {
       setField((prev) =>
         prev.map((field) => {
           if (
             field.position === g1AnyOpen[0]?.position &&
-            g1WinMove.length === 2
+            g1WinMove.length === 2 &&
+            checked >= 100 &&
+            checked < 200
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g2AnyOpen[0]?.position &&
-            g2WinMove.length === 2
+            g2WinMove.length === 2 &&
+            checked >= 200 &&
+            checked < 300
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g3AnyOpen[0]?.position &&
-            g3WinMove.length === 2
+            g3WinMove.length === 2 &&
+            checked >= 300 &&
+            checked < 400
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g4AnyOpen[0]?.position &&
-            g4WinMove.length === 2
+            g4WinMove.length === 2 &&
+            checked >= 400 &&
+            checked < 500
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g5AnyOpen[0]?.position &&
-            g5WinMove.length === 2
+            g5WinMove.length === 2 &&
+            checked >= 500 &&
+            checked < 600
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g6AnyOpen[0]?.position &&
-            g6WinMove.length === 2
+            g6WinMove.length === 2 &&
+            checked >= 600 &&
+            checked < 700
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g7AnyOpen[0]?.position &&
-            g7WinMove.length === 2
+            g7WinMove.length === 2 &&
+            checked >= 700 &&
+            checked < 800
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g8AnyOpen[0]?.position &&
-            g8WinMove.length === 2
+            g8WinMove.length === 2 &&
+            checked >= 800 &&
+            checked < 900
           ) {
             return { ...field, isFilled: 2 };
           } else return field;
         })
       );
     }
+
     // AI Surival Move
-    if (playerMoves >= 1 && checked >= 10 && checked < 30) {
+    if (playerMoves >= 1 && checked >= 10 && checked < 100) {
       setField((prev) =>
         prev.map((field) => {
           if (
             field.position === g1AnyOpen[0]?.position &&
-            g1Filter.length === 2
+            g1Filter.length === 2 &&
+            checked >= 10 &&
+            checked < 20
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g2AnyOpen[0]?.position &&
-            g2Filter.length === 2
+            g2Filter.length === 2 &&
+            checked >= 20 &&
+            checked < 30
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g3AnyOpen[0]?.position &&
-            g3Filter.length === 2
+            g3Filter.length === 2 &&
+            checked >= 30 &&
+            checked < 40
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g4AnyOpen[0]?.position &&
-            g4Filter.length === 2
+            g4Filter.length === 2 &&
+            checked >= 40 &&
+            checked < 50
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g5AnyOpen[0]?.position &&
-            g5Filter.length === 2
+            g5Filter.length === 2 &&
+            checked >= 50 &&
+            checked < 60
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g6AnyOpen[0]?.position &&
-            g6Filter.length === 2
+            g6Filter.length === 2 &&
+            checked >= 60 &&
+            checked < 70
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g7AnyOpen[0]?.position &&
-            g7Filter.length === 2
+            g7Filter.length === 2 &&
+            checked >= 70 &&
+            checked < 80
           ) {
             return { ...field, isFilled: 2 };
           } else if (
             field.position === g8AnyOpen[0]?.position &&
-            g8Filter.length === 2
+            g8Filter.length === 2 &&
+            checked >= 80 &&
+            checked < 90
           ) {
             return { ...field, isFilled: 2 };
           } else return field;
@@ -231,88 +293,58 @@ export default function PlayAi() {
     }
   }
 
-  useEffect(() => {}, [ttt]);
+  const [winner, setWinner] = useState(null);
+  console.log(winner);
+  function winnerDecided() {
+    if (checked >= 10000 && checked < 20000) {
+      setWinner(1);
+    } else if (checked >= 20000) {
+      setWinner(2);
+    }
+  }
+
+  useEffect(() => {
+    isAiWinning();
+  }, [aiMoves]);
 
   useEffect(() => {
     aiMove();
+    winnerDecided();
   }, [checked]);
 
   useEffect(() => {
-    playerWins();
+
     isChecked();
   }, [playerMoves]);
 
-  // useEffect(() => {
-  //   isChecked();
-  // }, [field]);
-
-  // function toggleFieldPlayer() {
-  //   setField(prevField => {field => {
-  //       return field.isFilled === null || 2 ?
-  //       {...field, isFilled: 1} : field
-  //   }})
+  // function playerWins() {
+  //   if (
+  //     (field[0].isFilled &&
+  //       field[1].isFilled === 1 &&
+  //       field[2].isFilled === 1) ||
+  //     (field[3].isFilled &&
+  //       field[4].isFilled === 1 &&
+  //       field[5].isFilled === 1) ||
+  //     (field[6].isFilled &&
+  //       field[7].isFilled === 1 &&
+  //       field[8].isFilled === 1) ||
+  //     (field[0].isFilled &&
+  //       field[3].isFilled === 1 &&
+  //       field[6].isFilled === 1) ||
+  //     (field[1].isFilled &&
+  //       field[4].isFilled === 1 &&
+  //       field[7].isFilled === 1) ||
+  //     (field[2].isFilled &&
+  //       field[5].isFilled === 1 &&
+  //       field[8].isFilled === 1) ||
+  //     (field[0].isFilled &&
+  //       field[4].isFilled === 1 &&
+  //       field[8].isFilled === 1) ||
+  //     (field[2].isFilled && field[4].isFilled === 1 && field[6].isFilled === 1)
+  //   )
+  //     console.log("Player Wins");
+  //   else console.log("No Winner Yet");
   // }
-
-  // function computerMove() {
-  //   if (field[0].isFilled && field[1].isFilled === 1) {
-  //     setField((prevField) =>
-  //       prevField.map((field) => {
-  //         return field.position === 2 ? { ...field, isFilled: 2 } : field;
-  //       })
-  //     );
-  //   }
-
-  //   (field[3].isFilled &&
-  //     field[4].isFilled === 1 &&
-  //     field[5].isFilled === 1) ||
-  //   (field[6].isFilled &&
-  //     field[7].isFilled === 1 &&
-  //     field[8].isFilled === 1) ||
-  //   (field[0].isFilled &&
-  //     field[3].isFilled === 1 &&
-  //     field[6].isFilled === 1) ||
-  //   (field[1].isFilled &&
-  //     field[4].isFilled === 1 &&
-  //     field[7].isFilled === 1) ||
-  //   (field[2].isFilled &&
-  //     field[5].isFilled === 1 &&
-  //     field[8].isFilled === 1) ||
-  //   (field[0].isFilled &&
-  //     field[4].isFilled === 1 &&
-  //     field[8].isFilled === 1) ||
-  //   (field[2].isFilled && field[4].isFilled === 1 && field[6].isFilled === 1)
-  // )
-  //   console.log("Player Wins");
-  // else console.log("No Winner Yet");
-
-  function playerWins() {
-    if (
-      (field[0].isFilled &&
-        field[1].isFilled === 1 &&
-        field[2].isFilled === 1) ||
-      (field[3].isFilled &&
-        field[4].isFilled === 1 &&
-        field[5].isFilled === 1) ||
-      (field[6].isFilled &&
-        field[7].isFilled === 1 &&
-        field[8].isFilled === 1) ||
-      (field[0].isFilled &&
-        field[3].isFilled === 1 &&
-        field[6].isFilled === 1) ||
-      (field[1].isFilled &&
-        field[4].isFilled === 1 &&
-        field[7].isFilled === 1) ||
-      (field[2].isFilled &&
-        field[5].isFilled === 1 &&
-        field[8].isFilled === 1) ||
-      (field[0].isFilled &&
-        field[4].isFilled === 1 &&
-        field[8].isFilled === 1) ||
-      (field[2].isFilled && field[4].isFilled === 1 && field[6].isFilled === 1)
-    )
-      console.log("Player Wins");
-    else console.log("No Winner Yet");
-  }
 
   function fieldArray() {
     const fieldArr = [];
