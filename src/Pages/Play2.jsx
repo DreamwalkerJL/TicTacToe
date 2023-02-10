@@ -15,20 +15,18 @@ export default function Play2() {
   // Functiouns which change the state
 
   function toggleFieldPlayerOne(row, column) {
-    const boardStateCopy = [...boardState];
-    boardStateCopy[row][column] = playerTurn;
-    setBoardState(boardStateCopy);
-    setPlayerTurn(() => {
-      if (playerTurn === "O") setPlayerTurn("X");
-      else setPlayerTurn("O");
-    });
-  }
+    if (!playerWon) {
+      const boardStateCopy = [...boardState];
+      boardStateCopy[row][column] = playerTurn;
 
-  //   function toggleFieldPlayerTwo(row, column) {
-  //     const boardStateCopy = [...boardState];
-  //     boardStateCopy[row][column] = "X";
-  //     setBoardState(boardStateCopy);
-  //   }
+      setBoardState(boardStateCopy);
+
+      setPlayerTurn(() => {
+        if (playerTurn === "O") setPlayerTurn("X");
+        else setPlayerTurn("O");
+      });
+    }
+  }
 
   function newGame() {
     let number = Math.floor(Math.random() * 2);
@@ -46,9 +44,18 @@ export default function Play2() {
   // Functions which interpret the current state
 
   function playerHasWon(player) {
+    let isDraw = true;
     for (let i = 0; i < boardState.length; i++) {
       let isWinningRow = true;
       let isWinningColumn = true;
+
+      for (let j = 0; j < boardState[i].length; j++) {
+        if (boardState[i][j] === null) {
+          isDraw = false;
+          break;
+        }
+      }
+
       for (let j = 0; j < boardState[i].length; j++) {
         if (boardState[i][j] !== player) {
           isWinningRow = false;
@@ -61,7 +68,10 @@ export default function Play2() {
           break;
         }
       }
-      if (isWinningRow || isWinningColumn) setPlayerWon(true);
+      if (isWinningRow || isWinningColumn) setPlayerWon(player);
+    }
+    if (isDraw) {
+      setPlayerWon("Draw");
     }
     if (
       (boardState[0][0] === player &&
@@ -84,43 +94,10 @@ export default function Play2() {
     newGame();
   }, []);
 
-  function Grid({ grid }) {
-    return (
-      <div>
-        <div>
-          {grid.map((row, rowIndex) =>
-            row.map((col, colIndex) => (
-              <Cell key={`${colIndex}-${rowIndex}`} cell={cell} />
-            ))
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  function Cell({ cell }) {
-    return <div>{cell}</div>;
-  }
-
-  function Field() {
-    return (
-      <div className="relative flex row">
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState}
-          <div>
-            <button onClick={() => toggleFieldPlayerOne(0, 0)}>Player 1</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
   function Grid() {
     return (
-      <div
-        style={{ display: "inline-block" }}
-        className="border-2 border-black"
-      >
-        <div className="bg-black grid grid-cols-3 gap-[2px]">
+      <div className="border-2 border-black inline-block">
+        <div className="bg-black grid grid-cols-3 gap-[2px] ">
           {boardState.map((row, rowIndex) =>
             row.map((cell, columnIndex) => (
               <Cell
@@ -138,117 +115,32 @@ export default function Play2() {
 
   function Cell({ cell, rowIndex, columnIndex }) {
     return (
-      <div className="bg-slate-400 w-20 h-20 text-center ">
-        {cell}
-        <div>
-          <button onClick={() => toggleFieldPlayerOne(rowIndex, columnIndex)}>
-            Player 1
-          </button>
+      <button onClick={() => toggleFieldPlayerOne(rowIndex, columnIndex)}>
+        <div className="bg-slate-400 w-20 h-20  text-2xl grid relative justify-center items-center text-center ">
+          {cell}
         </div>
-      </div>
+      </button>
     );
+  }
+
+  function DisplayWinner() {
+    function gameState() {
+      if (!playerWon) {
+        return <p>Next Turn: {playerTurn}</p>;
+      } else if(playerWon && playerWon !== "Draw") {
+        return <p>Player {playerWon} has won the game</p>
+      } else {
+        return <p>Its a Draw</p>
+      }
+    }
+    return <div>{gameState()}</div>;
   }
 
   return (
     <div>
-      <div onClick={newGame}>New Game</div>
+      <DisplayWinner/>
       <Grid />
-      <div className="relative flex row">
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[0][0]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(0, 0)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[0][1]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(0, 1)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[0][2]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(0, 2)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="relative flex row">
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[1][0]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(1, 0)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[1][1]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(1, 1)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[1][2]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(1, 2)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="relative flex row">
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[2][0]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(2, 0)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[2][1]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(2, 1)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="bg-slate-400 w-20 h-20 text-center">
-          {boardState[2][2]}
-          {!playerWon && (
-            <div>
-              <button onClick={() => toggleFieldPlayerOne(2, 2)}>
-                Player 1
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+      <div onClick={newGame}>Restart Game</div>
     </div>
   );
 }
