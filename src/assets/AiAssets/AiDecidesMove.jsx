@@ -73,7 +73,7 @@ export default function AiwhichMove({
     }
 
     // Block Fork
-    if (typeof state.blockFork === "number") {
+    if (typeof state.blockFork[0] === "number") {
       boardStateCopy[state.blockFork[0]][state.blockFork[1]] = playerTurn;
       setAnimatedCellsX([`${state.blockFork[0]}-${state.blockFork[1]}`]);
       return;
