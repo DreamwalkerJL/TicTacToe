@@ -5,6 +5,7 @@ import XChar from "./Images/Xchar.json";
 import Xpic from "./Images/X.png";
 import Opic from "./Images/O.png";
 import { motion } from "framer-motion";
+import { useMediaQuery } from 'react-responsive';
 
 export default function Grid({
   boardState,
@@ -80,7 +81,7 @@ export default function Grid({
       <button onClick={() => toggleFieldPlayerOne(rowIndex, columnIndex)}>
         <motion.div
           whileHover={hoverAniIfCellNull()}
-          className="relative grid h-20  w-20 items-center justify-center bg-[#A1D3FF] text-center text-2xl "
+          className="relative grid h-20  w-20 sm:h-32 sm:w-32 items-center justify-center bg-[#A1D3FF] text-center text-2xl "
         >
           <CellPlayed />
         </motion.div>

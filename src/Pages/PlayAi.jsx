@@ -116,7 +116,7 @@ export default function Play2() {
   return (
     <div className="absolute h-full w-full bg-white ">
       <div className="flex h-full  flex-col  items-center">
-        <p className="absolute mt-[40px]  flex font-Titillium text-3xl  font-bold">
+        <p className="absolute mt-[40px]  flex font-Titillium text-3xl sm:text-4xl font-bold">
           TIC TAC TOE
         </p>
         <div className="absolute mt-[80px] flex  font-Titillium">
@@ -132,7 +132,7 @@ export default function Play2() {
             animatedCellsX={animatedCellsX}
             setAnimatedCellsX={setAnimatedCellsX}
           />
-          <div className="relative mt-10 flex flex-col gap-5 font-Titillium   text-xl">
+          <div className="relative mt-10 flex flex-col gap-5 font-Titillium sm:text-3xl  text-xl ">
             <div className="relative flex gap-10 ">
               <motion.div
                 whileHover={{ scale: 1.05 }}
