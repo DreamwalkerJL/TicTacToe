@@ -87,6 +87,7 @@ export default function AiwhichMove({
     }
 
     // Go Middle when still open - (AI FIRST SPECIFIC)
+
     if (moveCount === 2 && boardState[1][1] === null && playerFirst === false) {
       boardStateCopy[1][1] = playerTurn;
       setAnimatedCellsX([`1-1`]);

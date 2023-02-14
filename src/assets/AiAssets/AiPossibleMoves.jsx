@@ -160,13 +160,13 @@ export default function AiPossibleMoves({
       });
     }
 
-    // Diagonal one - second field for win
-    if (diagonalOneX.length === 1 && diagonalOneNull.length === 2) {
-      dispatch({
-        type: ACTION.SECONDFIELDFORWIN,
-        payload: [diagonalOneNullIndex, diagonalOneNullIndex],
-      });
-    }
+    // // Diagonal one - second field for win
+    // if (diagonalOneX.length === 1 && diagonalOneNull.length === 2) {
+    //   dispatch({
+    //     type: ACTION.SECONDFIELDFORWIN,
+    //     payload: [diagonalOneNullIndex, diagonalOneNullIndex],
+    //   });
+    // }
 
     // Diagonal one - (AI FIRST SPECIFIC) - go for Fork
     if (
@@ -213,13 +213,13 @@ export default function AiPossibleMoves({
       });
     }
 
-    // Diagonal one - second field for win
-    if (diagonalTwoX.length === 1 && diagonalTwoNull.length === 2) {
-      dispatch({
-        type: ACTION.SECONDFIELDFORWIN,
-        payload: [diagonalTwoColumnIndex(), diagonalTwoNullIndex],
-      });
-    }
+    // // Diagonal one - second field for win
+    // if (diagonalTwoX.length === 1 && diagonalTwoNull.length === 2) {
+    //   dispatch({
+    //     type: ACTION.SECONDFIELDFORWIN,
+    //     payload: [diagonalTwoColumnIndex(), diagonalTwoNullIndex],
+    //   });
+    // }
 
     // Diagonal one & two - block fork
     if (
