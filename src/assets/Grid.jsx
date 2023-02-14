@@ -5,7 +5,6 @@ import XChar from "./Images/Xchar.json";
 import Xpic from "./Images/X.png";
 import Opic from "./Images/O.png";
 import { motion } from "framer-motion";
-import { useMediaQuery } from 'react-responsive';
 
 export default function Grid({
   boardState,
@@ -55,7 +54,7 @@ export default function Grid({
           );
         } else if (cell === "X") {
           return (
-            <motion.div initial={{ rotateX: 0 }} animate={{ rotate: 180 }} >
+            <motion.div initial={{ rotateX: 0 }} animate={{ rotate: 360 }} transition={{ type: 'spring'  }}>
               {cell}
             </motion.div>
           );
@@ -81,7 +80,7 @@ export default function Grid({
       <button onClick={() => toggleFieldPlayerOne(rowIndex, columnIndex)}>
         <motion.div
           whileHover={hoverAniIfCellNull()}
-          className="relative grid h-20  w-20 sm:h-32 sm:w-32 items-center justify-center bg-[#A1D3FF] text-center text-2xl "
+          className="relative grid h-20  w-20 sm:h-32 sm:w-32 items-center justify-center bg-[#A1D3FF] text-center text-2xl sm:text-5xl"
         >
           <CellPlayed />
         </motion.div>
@@ -90,8 +89,8 @@ export default function Grid({
   }
 
   return (
-    <div className="inline-block border-2 border-black">
-      <div className="grid grid-cols-3 gap-[2px] bg-black ">
+    <div className="inline-block border-[2px] sm:border-[3px] border-black">
+      <div className="grid grid-cols-3 gap-[2px] sm:gap-[3px] bg-black ">
         {boardState.map((row, rowIndex) =>
           row.map((cell, columnIndex) => (
             <Cell

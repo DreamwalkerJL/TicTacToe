@@ -119,10 +119,10 @@ export default function Play2() {
         <p className="absolute mt-[40px]  flex font-Titillium text-3xl sm:text-4xl font-bold">
           TIC TAC TOE
         </p>
-        <div className="absolute mt-[80px] flex  font-Titillium">
+        <div className="absolute mt-[100px] flex text-xl sm:text-3xl  font-Titillium">
           <DisplayWinner />
         </div>
-        <div className="relative mt-[120px] flex flex-col  items-center justify-center">
+        <div className="relative mt-[160px] flex flex-col  items-center justify-center">
           <Grid
             boardState={boardState}
             setBoardState={setBoardState}
@@ -136,14 +136,14 @@ export default function Play2() {
             <div className="relative flex gap-10 ">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="cursor-pointer border-2 border-black bg-[#85FFF2] p-2"
+                className="cursor-pointer border-2 sm:border-[3px] border-black bg-[#85FFF2] p-2"
                 onClick={playerGoesFirst}
               >
                 Go First
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="cursor-pointer border-2 border-black bg-[#85FFF2] p-2"
+                className="cursor-pointer border-2 sm:border-[3px] border-black bg-[#85FFF2] p-2"
                 onClick={aiGoesFirst}
               >
                 Go Second
@@ -151,7 +151,7 @@ export default function Play2() {
             </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex cursor-pointer justify-center border-2 border-black bg-[#879FE8] p-2 text-center"
+              className="flex cursor-pointer justify-center border-2 sm:border-[3px] border-black bg-[#879FE8] p-2 text-center"
               onClick={newGame}
             >
               Restart Game
