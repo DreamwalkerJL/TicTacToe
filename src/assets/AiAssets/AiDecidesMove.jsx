@@ -79,6 +79,13 @@ export default function AiwhichMove({
       return;
     }
 
+    // Block Straight 2x "O"
+    if (typeof state.emptyCorner[0] === "number") {
+      boardStateCopy[state.emptyCorner[0]][state.emptyCorner[1]] = playerTurn;
+      setAnimatedCellsX([`${state.emptyCorner[0]}-${state.emptyCorner[1]}`]);
+      return;
+    }
+
     // Go Middle when still open - (AI FIRST SPECIFIC)
     if (moveCount === 2 && boardState[1][1] === null && playerFirst === false) {
       boardStateCopy[1][1] = playerTurn;

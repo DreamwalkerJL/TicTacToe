@@ -3,7 +3,7 @@ import AiCalculator from "./AiCalculator";
 import { initialState, reducer, ACTION } from "./AiState";
 
 // Update the AiState, on which moves are possible for the AI
-export default function ScanningPossibleMoves({
+export default function AiPossibleMoves({
   boardState,
   playerWon,
   playerTurn,
@@ -12,9 +12,10 @@ export default function ScanningPossibleMoves({
   allColumns,
   diagonalOne,
   diagonalTwo,
+  corners,
+  cornersIndex,
   sides,
   sidesIndex,
-  cornersIndex,
   playerFirst,
   dispatch,
 }) {
@@ -23,6 +24,9 @@ export default function ScanningPossibleMoves({
     const sidesIndexO = sides.findIndex((cell) => cell === "O");
     const sidesIndexX = sides.findIndex((cell) => cell === "X");
     const sidesNull = sides.findIndex((cell) => cell === null);
+    const cornersIndexO = corners.findIndex((cell) => cell === "O");
+    const cornersIndexX = corners.findIndex((cell) => cell === "X");
+    const cornersNull = corners.findIndex((cell) => cell === null);
 
     function ThreeSidedCoinflip() {
       return Math.floor(Math.random() * 3);
@@ -226,6 +230,18 @@ export default function ScanningPossibleMoves({
     ) {
       let coord = sidesIndex[sidesNull];
       dispatch({ type: ACTION.BLOCKFORK, payload: [coord[0], coord[1]] });
+    }
+    // Diagonal one & two - emptyCorner
+    if (
+      (diagonalOneO.length === 2 &&
+        diagonalOneX.length === 1 &&
+        moveCount === 2) ||
+      (diagonalTwoO.length === 2 &&
+        diagonalTwoX.length === 1 &&
+        moveCount === 2)
+    ) {
+      let coord = cornersIndex[cornersNull];
+      dispatch({ type: ACTION.EMPTYCORNER, payload: [coord[0], coord[1]] });
     }
 
     setIsMoveScanned((prev) => !prev);

@@ -8,6 +8,7 @@ export const ACTION = {
   DOUBLESIDE: "doubleSide",
   BLOCKWIN: "blockWin",
   BLOCKFORK: "blockFork",
+  EMPTYCORNER: "emptyCorner",
   SECONDFIELDFORWIN: "secondFieldForWin",
   BLOCKDOUBLESIDE: "blockDoubleSide",
   NOPURPOSEFIELD: "noPurposeField",
@@ -20,6 +21,7 @@ export const initialState = {
   doubleSide: [],
   blockWin: [],
   blockFork: [],
+  emptyCorner: [],
   secondFieldForWin: [],
   blockDoubleSide: [],
   noPurposeField: [],
@@ -35,12 +37,14 @@ export const reducer = (state, action) => {
       return { ...state, win: action.payload };
     case "fork":
       return { ...state, fork: action.payload };
-      case "doubleSide":
-        return { ...state, doubleSide: action.payload };
+    case "doubleSide":
+      return { ...state, doubleSide: action.payload };
     case "blockWin":
       return { ...state, blockWin: action.payload };
     case "blockFork":
       return { ...state, blockFork: action.payload };
+    case "emptyCorner":
+      return { ...state, emptyCorner: action.payload };
     case "secondFieldForWin":
       return { ...state, secondFieldForWin: action.payload };
     case "blockDoubleSide":

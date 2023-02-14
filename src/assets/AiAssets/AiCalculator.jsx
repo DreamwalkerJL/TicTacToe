@@ -22,6 +22,12 @@ export default function AiCalculator() {
     boardState[1][2],
     boardState[2][1],
   ];
+  const corners = [
+    boardState[0][0],
+    boardState[0][2],
+    boardState[2][0],
+    boardState[2][2],
+  ];
 
   const sidesIndex = [
     [0, 1],
@@ -54,6 +60,7 @@ export default function AiCalculator() {
     diagonalOne,
     diagonalTwo,
     sides,
+    corners,
     sidesIndex,
     cornersIndex,
   ];

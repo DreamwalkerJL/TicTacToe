@@ -16,6 +16,7 @@ export default function Play2() {
     diagonalOne,
     diagonalTwo,
     sides,
+    corners,
     sidesIndex,
     cornersIndex,
   ] = AiCalculator();
@@ -75,6 +76,7 @@ export default function Play2() {
       diagonalOne,
       diagonalTwo,
       sides,
+      corners,
       sidesIndex,
       cornersIndex,
       playerFirst,
