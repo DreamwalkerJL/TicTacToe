@@ -4,6 +4,11 @@ module.exports = {
   './index.html'], 
   theme: {
     extend: {},
+    fontFamily: {
+      Titillium: ['Titillium Web', 'Helvetica', 'Arial', 'sans-serif'],
+      Karla: ['Karla', 'Helvetica', 'Arial', 'sans-serif'],
+    },
   },
+
   plugins: [],
 }
