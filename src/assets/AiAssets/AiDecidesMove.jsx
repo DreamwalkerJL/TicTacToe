@@ -53,7 +53,6 @@ export default function AiwhichMove({
 
     // Go for Fork - (AI FIRST SPECIFIC)
     if (typeof state.fork[0] === "number") {
-      console.log("HELLO");
       boardStateCopy[state.fork[0]][state.fork[1]] = playerTurn;
       setAnimatedCellsX([`${state.fork[0]}-${state.fork[1]}`]);
       return;
@@ -88,7 +87,6 @@ export default function AiwhichMove({
     }
 
     // Second field for a straight-line win
-    console.log("fwef");
     if (typeof state.secondFieldForWin[0] === "number") {
       boardState[state.secondFieldForWin[0]][state.secondFieldForWin[1]] =
         playerTurn;

@@ -19,7 +19,7 @@ export default function Play2() {
     sidesIndex,
     cornersIndex,
   ] = AiCalculator();
-  console.log(boardState);
+
   const [playerWon, setPlayerWon] = useState(false);
 
   const [playerTurn, setPlayerTurn] = useState(null);
@@ -46,7 +46,6 @@ export default function Play2() {
       [null, null, null],
       [null, null, null],
     ]);
-    console.log(playerFirst);
   }
 
   function playerGoesFirst() {
@@ -114,25 +113,13 @@ export default function Play2() {
     return <div>{gameState()}</div>;
   }
 
-  function lol() {
-    const arr = [4, 5, 6, 1, 2, 3, 8];
-
-    for (let i = 1; i < 10; i++) {
-      const pop = arr.filter((arrSpot) => arrSpot === i);
-      if (pop.length !== 1) {
-        console.log(i);
-      }
-    }
-  }
-  console.log(lol());
-
   return (
     <div className="absolute h-full w-full bg-white ">
       <div className="flex h-full  flex-col  items-center">
         <p className="absolute mt-[40px]  flex font-Titillium text-3xl  font-bold">
           TIC TAC TOE
         </p>
-        <div className="absolute mt-[80px] font-Titillium  flex">
+        <div className="absolute mt-[80px] flex  font-Titillium">
           <DisplayWinner />
         </div>
         <div className="relative mt-[120px] flex flex-col  items-center justify-center">
@@ -164,16 +151,17 @@ export default function Play2() {
             </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-center flex cursor-pointer justify-center border-2 border-black bg-[#879FE8] p-2"
+              className="flex cursor-pointer justify-center border-2 border-black bg-[#879FE8] p-2 text-center"
               onClick={newGame}
             >
               Restart Game
             </motion.div>
           </div>
         </div>
-        <p className="text-black text-xs absolute bottom-2 right-2">It's not winnable 🙂</p>
+        <p className="absolute bottom-2 right-2 text-xs text-black">
+          P.S. It's not winnable 🙂
+        </p>
       </div>
-
     </div>
   );
 }
