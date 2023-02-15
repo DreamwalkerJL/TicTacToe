@@ -118,10 +118,10 @@ export default function Play2() {
   return (
     <div className="absolute h-full w-full bg-white ">
       <div className="flex h-full  flex-col  items-center">
-        <p className="absolute mt-[40px]  flex font-Titillium text-3xl sm:text-4xl font-bold">
+        <p className="absolute mt-[40px]  flex font-Titillium text-3xl font-bold sm:text-4xl">
           TIC TAC TOE
         </p>
-        <div className="absolute mt-[100px] flex text-xl sm:text-3xl  font-Titillium">
+        <div className="absolute mt-[100px] flex font-Titillium text-xl  sm:text-3xl">
           <DisplayWinner />
         </div>
         <div className="relative mt-[160px] flex flex-col  items-center justify-center">
@@ -134,18 +134,20 @@ export default function Play2() {
             animatedCellsX={animatedCellsX}
             setAnimatedCellsX={setAnimatedCellsX}
           />
-          <div className="relative mt-10 flex flex-col gap-5 font-Titillium sm:text-3xl  text-xl ">
+          <div className="relative mt-10 flex flex-col gap-5 font-Titillium text-xl  sm:text-3xl ">
             <div className="relative flex gap-10 ">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="cursor-pointer border-2 sm:border-[3px] border-black bg-[#85FFF2] p-2"
+                whileTap={{ scale: .9 }}
+                className="cursor-pointer border-2 border-black bg-[#85FFF2] p-2 sm:border-[3px]"
                 onClick={playerGoesFirst}
               >
                 Go First
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="cursor-pointer border-2 sm:border-[3px] border-black bg-[#85FFF2] p-2"
+                whileTap={{ scale: .9 }}
+                className="cursor-pointer border-2 border-black bg-[#85FFF2] p-2 sm:border-[3px]"
                 onClick={aiGoesFirst}
               >
                 Go Second
@@ -153,7 +155,8 @@ export default function Play2() {
             </div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex cursor-pointer justify-center border-2 sm:border-[3px] border-black bg-[#879FE8] p-2 text-center"
+              whileTap={{ scale: .9 }}
+              className="flex cursor-pointer justify-center border-2 border-black bg-[#879FE8] p-2 text-center sm:border-[3px]"
               onClick={newGame}
             >
               Restart Game

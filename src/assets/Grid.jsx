@@ -38,23 +38,27 @@ export default function Grid({
             </motion.div>
           );
         } else if (cell === "O") {
-          return (
-            <motion.div >
-              {cell}
-            </motion.div>
-          );
+          return <motion.div>{cell}</motion.div>;
         }
       }
       function CellX() {
         if (isAnimatedX && cell === "X" && !playerWon) {
           return (
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{delay: .5}}>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
               {cell}
             </motion.div>
           );
         } else if (cell === "X") {
           return (
-            <motion.div initial={{ rotateX: 0 }} animate={{ rotate: 360 }} transition={{ type: 'spring'  }}>
+            <motion.div
+              initial={{ rotateX: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ type: "spring" }}
+            >
               {cell}
             </motion.div>
           );
@@ -80,7 +84,7 @@ export default function Grid({
       <button onClick={() => toggleFieldPlayerOne(rowIndex, columnIndex)}>
         <motion.div
           whileHover={hoverAniIfCellNull()}
-          className="relative grid h-20  w-20 sm:h-32 sm:w-32 items-center justify-center bg-[#A1D3FF] text-center text-2xl sm:text-5xl"
+          className="relative grid h-20  w-20 items-center justify-center bg-[#A1D3FF] text-center text-2xl sm:h-32 sm:w-32 sm:text-5xl"
         >
           <CellPlayed />
         </motion.div>
@@ -89,8 +93,8 @@ export default function Grid({
   }
 
   return (
-    <div className="inline-block border-[2px] sm:border-[3px] border-black">
-      <div className="grid grid-cols-3 gap-[2px] sm:gap-[3px] bg-black ">
+    <div className="inline-block border-[2px] border-black sm:border-[3px]">
+      <div className="grid grid-cols-3 gap-[2px] bg-black sm:gap-[3px] ">
         {boardState.map((row, rowIndex) =>
           row.map((cell, columnIndex) => (
             <Cell
